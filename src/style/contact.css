@@ -55,6 +55,23 @@
 .contact-form button:hover {
   background: #0056b3;
 }
+.success-message {
+  background: #10b981;
+  color: white;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.error-message {
+  background: #ef4444;
+  color: white;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  text-align: center;
+}
 @media(max-width: 600px){
 
 .contact-form{

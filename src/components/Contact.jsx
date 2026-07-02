@@ -1,5 +1,6 @@
 import { useState } from "react";
-import '../style/contact.css';
+import emailjs from "@emailjs/browser";
+import "../style/contact.css";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +8,10 @@ const Contact = () => {
     email: "",
     message: ""
   });
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -17,21 +22,75 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Message sent successfully!");
 
-    setFormData({
-      name: "",
-      email: "",
-      message: ""
+    setLoading(true);
+    setSuccess(false);
+    setError("");
+
+    console.log("📩 Sending data to EmailJS:", formData);
+
+    emailjs.send(
+      "service_88mchsn",
+      "template_vmrd54f",
+      {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_name: "Misheck"
+      },
+      "Dhjdyy5TfeJFl0Z02"
+    )
+    .then((result) => {
+      console.log("✅ SUCCESS:", result.text);
+
+      setSuccess(true);
+
+      setFormData({
+        name: "",
+        email: "",
+        message: ""
+      });
+
+      setLoading(false);
+
+      // auto-hide success message
+      setTimeout(() => {
+        setSuccess(false);
+      }, 3000);
+    })
+    .catch((error) => {
+      console.log("❌ EMAILJS ERROR:", error.text || error);
+
+      setError("Failed to send message. Please try again.");
+
+      setLoading(false);
     });
   };
 
   return (
-   
     <div className="contact-container">
-      <form className="contact-form" onSubmit={handleSubmit} data-aos="fade-up">
+
+      <form
+        className="contact-form"
+        onSubmit={handleSubmit}
+        data-aos="fade-up"
+      >
+
         <h2>Contact Us</h2>
+
+        {/* SUCCESS MESSAGE */}
+        {success && (
+          <p className="success-message">
+            Message sent successfully ✔
+          </p>
+        )}
+
+        {/* ERROR MESSAGE */}
+        {error && (
+          <p className="error-message">
+            {error}
+          </p>
+        )}
 
         <label>Name</label>
         <input
@@ -60,10 +119,14 @@ const Contact = () => {
           onChange={handleChange}
           placeholder="Write your message..."
           required
-        ></textarea>
+        />
 
-        <button type="submit">Send Message</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Sending..." : "Send Message"}
+        </button>
+
       </form>
+
     </div>
   );
 };
