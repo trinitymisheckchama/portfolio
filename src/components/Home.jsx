@@ -17,7 +17,7 @@ const Home = () => {
 
           <p className="greeting">👋 Hello, I'm</p>
 
-          <h1>Misheck Trinity Chama</h1>
+          <h1> Trinity Misheck Chama</h1>
 
           <TypeAnimation
             sequence={[

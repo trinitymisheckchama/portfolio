@@ -6,20 +6,26 @@ const Projects = () => {
       id: 1,
       title: "E-Commerce Website",
       description: "An online shopping platform built with React, Node.js, and MySQL.",
-      github: "https://github.com/yourusername/ecommerce",
+      github: "https://github.com/trinitymisheckchama/e-commerce--flaskog.git",
     },
     {
       id: 2,
       title: "Student Management System",
       description: "A web application for managing student records and grades.",
-      github: "https://github.com/yourusername/student-management",
+      github: "https://github.com/trinitymisheckchama/student-management",
     },
     {
       id: 3,
       title: "Personal Portfolio",
       description: "A responsive portfolio website showcasing my skills and projects.",
-      github: "https://github.com/yourusername/portfolio",
+      github: "https://github.com/trinitymisheckchama/portfolio",
     },
+    {
+      id: 4,
+      title: "digital hygiene",
+      description: "A full-stack blogging platform with user authentication and CRUD functionality.",
+      github: "https://github.com/sakhile-bit/sakhile_final-_year_pro.git",
+    }
   ];
 
   return (

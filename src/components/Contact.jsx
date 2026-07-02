@@ -1,5 +1,6 @@
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
 import "../style/contact.css";
 
 const Contact = () => {
@@ -10,8 +11,6 @@ const Contact = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -22,14 +21,10 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     setLoading(true);
-    setSuccess(false);
-    setError("");
 
-    console.log("📩 Sending data to EmailJS:", formData);
-
-    emailjs.send(
+    // 1. Send message to YOU
+    const sendToYou = emailjs.send(
       "service_88mchsn",
       "template_vmrd54f",
       {
@@ -39,58 +34,44 @@ const Contact = () => {
         to_name: "Misheck"
       },
       "Dhjdyy5TfeJFl0Z02"
-    )
-    .then((result) => {
-      console.log("✅ SUCCESS:", result.text);
+    );
 
-      setSuccess(true);
+    // 2. Auto-reply to USER
+    const sendAutoReply = emailjs.send(
+      "service_88mchsn",
+      "auto_reply_template",
+      {
+        to_name: formData.name,
+        to_email: formData.email,
+        message: formData.message
+      },
+      "Dhjdyy5TfeJFl0Z02"
+    );
 
-      setFormData({
-        name: "",
-        email: "",
-        message: ""
+    Promise.all([sendToYou, sendAutoReply])
+      .then(() => {
+        toast.success("Message sent successfully ✔");
+
+        setFormData({
+          name: "",
+          email: "",
+          message: ""
+        });
+
+        setLoading(false);
+      })
+      .catch(() => {
+        toast.error("Something went wrong. Try again.");
+        setLoading(false);
       });
-
-      setLoading(false);
-
-      // auto-hide success message
-      setTimeout(() => {
-        setSuccess(false);
-      }, 3000);
-    })
-    .catch((error) => {
-      console.log("❌ EMAILJS ERROR:", error.text || error);
-
-      setError("Failed to send message. Please try again.");
-
-      setLoading(false);
-    });
   };
 
   return (
     <div className="contact-container">
 
-      <form
-        className="contact-form"
-        onSubmit={handleSubmit}
-        data-aos="fade-up"
-      >
+      <form className="contact-form" onSubmit={handleSubmit}>
 
         <h2>Contact Us</h2>
-
-        {/* SUCCESS MESSAGE */}
-        {success && (
-          <p className="success-message">
-            Message sent successfully ✔
-          </p>
-        )}
-
-        {/* ERROR MESSAGE */}
-        {error && (
-          <p className="error-message">
-            {error}
-          </p>
-        )}
 
         <label>Name</label>
         <input
@@ -98,7 +79,6 @@ const Contact = () => {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          placeholder="Enter your name"
           required
         />
 
@@ -108,7 +88,6 @@ const Contact = () => {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          placeholder="Enter your email"
           required
         />
 
@@ -117,7 +96,6 @@ const Contact = () => {
           name="message"
           value={formData.message}
           onChange={handleChange}
-          placeholder="Write your message..."
           required
         />
 

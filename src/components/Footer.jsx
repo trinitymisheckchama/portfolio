@@ -10,7 +10,7 @@ const Footer = () => {
 
         {/* Name / Branding */}
         <div className="footer-brand">
-          <h2>MTC</h2>
+          <h2>TMC</h2>
           <p>Building modern web applications with React & Flask.</p>
         </div>
 
@@ -29,15 +29,15 @@ const Footer = () => {
           <h3>Connect</h3>
 
           <div className="icons">
-            <a href="https://github.com" target="_blank">
+            <a href="https://github.com/trinitymisheckchama" target="_blank">
               <FaGithub />
             </a>
 
-            <a href="https://linkedin.com" target="_blank">
+            <a href="https://linkedin.com/in/trinity-misheck-chama" target="_blank">
               <FaLinkedin />
             </a>
 
-            <a href="mailto:youremail@gmail.com">
+            <a href="mailto:trinitymeshach31@gmail.com">
               <FaEnvelope />
             </a>
           </div>
@@ -47,7 +47,7 @@ const Footer = () => {
 
       {/* Bottom line */}
       <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} Misheck Trinity Chama. All rights reserved.</p>
+        <p>© {new Date().getFullYear()}  Trinity Misheck Chama. All rights reserved.</p>
       </div>
 
     </footer>

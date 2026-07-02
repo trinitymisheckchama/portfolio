@@ -7,21 +7,28 @@ const ProjectsSection = () => {
       title: "E-Commerce Website",
       description: "Full-stack shopping platform with cart, authentication, and checkout.",
       tech: "React, Node.js, MySQL",
-      github: "#",
+      github: "https://github.com/trinitymisheckchama/e-commerce--flaskog.git",
       live: "#"
     },
     {
       title: "Student Management System",
       description: "System for managing students, grades, and records.",
       tech: "Flask, Python, SQLite",
-      github: "#",
+      github: "https://github.com/trinitymisheckchama/student-management",
       live: "#"
     },
     {
       title: "Portfolio Website",
       description: "Personal portfolio showcasing my skills and projects.",
       tech: "React, CSS",
-      github: "#",
+      github: "https://github.com/trinitymisheckchama/portfolio",
+      live: "#"
+    },
+    {
+      title: "Digital Hygiene",
+      description: "A full-stack blogging platform with user authentication and CRUD functionality.",
+      tech: " Flask, MySQL",
+      github: "https://github.com/sakhile-bit/sakhile_final-_year_pro.git",
       live: "#"
     }
   ];
